@@ -48,9 +48,33 @@ html {
 }
 
 /*========== Variables Dark theme ==========*/
-
+body:not(dark-theme) {
+  transition: 0.6s;
+}
+body.dark-theme {
+  --title-color: #f2f2f2;
+  --text-color: #bfbfbf;
+  --text-color-light: #707070;
+  --container-color: #212121;
+  --container-color-alt: #181616;
+  --body-color: #212121;
+  transition: 0.6s;
+  background-color: #000000da;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
 /*========== Button Dark/Light ==========*/
-
+.change-theme {
+  position: absolute;
+  right: 0;
+  top: 2.2rem;
+  display: flex;
+  color: var(--text-color);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.change-theme:hover {
+  color: var(--title-color);
+}
 /*========== Font size variables to scale cv ==========*/
 
 /*========== Generate PDF button ==========*/
@@ -62,7 +86,7 @@ body {
   font-family: var(--body-font);
   font-size: var(--normal-font-size);
   font-weight: var(--font-medium);
-  background-color: var(--first-color-lighten);
+  background-color: var(--body-font);
   color: var(--text-color);
   line-height: 1.6;
 }
@@ -125,7 +149,7 @@ img {
   bottom: 0;
   left: 0;
   z-index: var(--z-fixed);
-  background-color:var(--body-color);
+  background-color: var(--body-color);
   box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.1);
   transition: 0.3s;
 }
@@ -143,7 +167,7 @@ img {
     left: 0;
     width: 100%;
     padding: 2rem 1.5rem;
-    background-color: var(--body-font);
+    background-color: var(--body-color);
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
     border-radius: 1rem 1rem 0 0;
     z-index: var(--z-fixed);
@@ -263,13 +287,16 @@ img {
   text-align: center;
 }
 /*========== EDUCATION AND EXPERIENCE ==========*/
-.education__content,.experience__content {
+.education__content,
+.experience__content {
   display: flex;
 }
-.education__time,.experience__time {
+.education__time,
+.experience__time {
   padding-right: 1rem;
 }
-.education__rounder,.experience__rounder {
+.education__rounder,
+.experience__rounder {
   position: relative;
   display: block;
   width: 16px;
@@ -278,20 +305,24 @@ img {
   border-radius: 50%;
   margin-top: 0.25rem;
 }
-.education__line,.experience__line {
+.education__line,
+.experience__line {
   display: block;
   width: 2px;
   height: 110%;
   background-color: var(--text-color-light);
   transform: translateX(7px);
 }
-.education__data,.experience__data {
+.education__data,
+.experience__data {
   gap: 0.5rem;
 }
-.education__title,.experience__title {
+.education__title,
+.experience__title {
   font-size: var(--h3-font-size);
 }
-.education__studies,.experience__company {
+.education__studies,
+.experience__company {
   font-size: var(--small-font-size);
   color: var(--title-color);
 }
@@ -299,48 +330,141 @@ img {
   font-size: var(--smaller-font-size);
 }
 /*========== SKILLS AND LANGUAGES ==========*/
-.skills__content {
+.skills__content,
+.languages__content {
   grid-template-columns: repeat(2, 1fr);
 }
 .skills__content {
   gap: 0;
 }
-.skills__name {
+.skills__name{
   display: flex;
   align-items: center;
   margin-bottom: var(--mb-3);
 }
-.skills__circle {
+.skills__circle,
+.languages__circle {
   width: 5px;
   height: 5px;
   display: inline-block;
+
   border-radius: 50%;
   background-color: var(--text-color-light);
   margin-right: 0.75rem;
 }
 /*========== CERTIFICATES ==========*/
-.certificate__title{
+.certificate__title {
   font-size: var(--h3-font-size);
   margin-bottom: var(--mb-1);
 }
 /*========== REFERENCES ==========*/
-.references__content{
+.references__content {
   gap: 0.25em;
 }
-.references__subtitle{
+.references__subtitle {
   color: var(--text-color-light);
 }
-.references__subtitle,.references__contact{
+.references__subtitle,
+.references__contact {
   font-size: var(--smaller-font-size);
 }
-.references__title{
+.references__title {
   font-size: var(--h3-font-size);
 }
 /*========== INTERESTS ==========*/
-
+.interests__container {
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: var(--mb-2);
+}
+.interests__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.interests__icon {
+  font-size: 1.5rem;
+  color: var(--text-color-light);
+  margin-bottom: 0.25rem;
+}
 /* Scroll top */
-
+.scrolltop {
+  position: fixed;
+  right: 1rem;
+  bottom: -20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.25rem;
+  background-color: var(--container-color-alt);
+  border-radius: 0.4rem;
+  z-index: var(--z-tooltip);
+  transition: 0.4s;
+  visibility: hidden;
+}
+.scrolltop__icon {
+  font-size: 1.2rem;
+  color: var(--text-color);
+}
+.show-scroll {
+  visibility: visible;
+  bottom: 5rem;
+}
 /*========== MEDIA QUERIES ==========*/
-/* For small devices, menu two columns */
 
+/* For small devices, menu two columns */
+@media screen and (max-width: 320px) {
+  .nav__list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem, 0.5rem;
+  }
+}
 /* Classes modified for large screen size */
+
+@media screen and (min-width: 768px) {
+  body {
+    margin: 3rem 0;
+  }
+  .bd-container {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .l-header,
+  .scrolltop {
+    display: none;
+  }
+  .resume {
+    display: grid;
+    grid-template-columns: 0.5fr 1fr;
+    background-color: var(--container-color);
+    box-shadow: 0 0 8px rgba(13, 12, 12, 0.15);
+  }
+  .resume__left {
+    background-color: var(--container-color-alt);
+  }
+  .resume__left,
+  .resume__right {
+    padding: 0 1.5rem;
+  }
+  .section-title,
+  .profile__description {
+    text-align: initial;
+  }
+
+  .home__container {
+    gap: 1.5rem;
+  }
+  .home__botton-movil {
+    display: none;
+  }
+  .references__container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .languages__content {
+    grid-template-columns: repeat(3, max-content);
+    column-gap: 3.5rem;
+  }
+  .interests__container {
+    grid-template-columns: repeat(4, max-content);
+    column-gap: 3.5rem;
+  }
+}
